@@ -13,9 +13,17 @@ import javax.swing.JButton;
 import javax.swing.border.EtchedBorder;
 import java.awt.event.ActionListener;
 import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.awt.event.ActionEvent;
 import java.awt.Panel;
 import java.awt.Color;
+import java.awt.GridBagLayout;
+import java.awt.GridBagConstraints;
+import java.awt.Insets;
+import com.jgoodies.forms.layout.FormLayout;
+import com.jgoodies.forms.layout.ColumnSpec;
+import com.jgoodies.forms.layout.RowSpec;
 
 
 public class GUI_window_builder {
@@ -54,28 +62,42 @@ public class GUI_window_builder {
 		frmTetrisInstaller.setTitle("Tetris Installer");
 		frmTetrisInstaller.setBounds(100, 100, 450, 300);
 		frmTetrisInstaller.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frmTetrisInstaller.getContentPane().setLayout(null);
 		
 		JPanel panel = new JPanel();
-		panel.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
-		frmTetrisInstaller.getContentPane().add(panel, BorderLayout.NORTH);
+		panel.setBounds(10, 11, 414, 106);
+		frmTetrisInstaller.getContentPane().add(panel);
+		panel.setLayout(null);
 		
-		JLabel lblNewLabel = new JLabel("Willkommen beim Tetris Installer");
-		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 22));
+		JLabel lblNewLabel = new JLabel("Tetris Installer");
+		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 23));
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel.setBounds(10, 11, 394, 56);
 		panel.add(lblNewLabel);
 		
+		JPanel panel_1 = new JPanel();
+		panel_1.setBounds(10, 128, 414, 122);
+		frmTetrisInstaller.getContentPane().add(panel_1);
+		panel_1.setLayout(null);
+		
 		JButton btnNewButton = new JButton("Systemcheck");
-		frmTetrisInstaller.getContentPane().add(btnNewButton, BorderLayout.SOUTH);
+		btnNewButton.setBounds(20, 52, 118, 23);
+		panel_1.add(btnNewButton);
 		
 		JLabel lblNewLabel_1 = new JLabel("");
 		lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
-		frmTetrisInstaller.getContentPane().add(lblNewLabel_1, BorderLayout.CENTER);
+		lblNewLabel_1.setBounds(161, 11, 243, 100);
+		panel_1.add(lblNewLabel_1);
 		
+		JButton btnNewButton_1 = new JButton("weiter");
+		btnNewButton_1.setBounds(20, 52, 118, 23);
+		panel_1.add(btnNewButton_1);
 		
 		
 		btnNewButton.addActionListener(new ActionListener() {
-
 			
+			
+			//functions
 			public String isPythonInstalled() {
 			    try {
 			            Process process = Runtime.getRuntime().exec("python.exe");
@@ -91,20 +113,27 @@ public class GUI_window_builder {
 			
 			String successfull_python = "<html>Sie haben Python bereits installiert. <br /> Gehen Sie sicher, dass es sich um Python 3 handelt</html>";
 			String nope = "<html>Sie haben Python nicht installiert. <br />Klicken Sie jetzt auf installieren, um dies zu tun.</html>";
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				
-				if (isPythonInstalled() == "yes") {
+				if(isPythonInstalled() == "yes") {
 					lblNewLabel_1.setText(successfull_python);
-				} else {
+					panel_1.remove(btnNewButton);
+				}else {
 					lblNewLabel_1.setText(nope);
-					lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
+					
+					try {
+						java.awt.Desktop.getDesktop().browse(new URI("https://google.de"));
+					} catch (IOException e1) {
+						e1.printStackTrace();
+					} catch (URISyntaxException e1) {
+						e1.printStackTrace();
+					}
 				}
 				
 			}
 			
 		});
 	}
-
 }
