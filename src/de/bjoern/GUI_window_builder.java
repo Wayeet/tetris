@@ -65,14 +65,14 @@ public class GUI_window_builder {
 		frmTetrisInstaller.getContentPane().setLayout(null);
 		
 		JPanel panel = new JPanel();
-		panel.setBounds(10, 11, 414, 106);
+		panel.setBounds(10, 11, 414, 46);
 		frmTetrisInstaller.getContentPane().add(panel);
 		panel.setLayout(null);
 		
 		JLabel lblNewLabel = new JLabel("Tetris Installer");
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 23));
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel.setBounds(10, 11, 394, 56);
+		lblNewLabel.setBounds(10, 0, 394, 56);
 		panel.add(lblNewLabel);
 		
 		JPanel panel_1 = new JPanel();
@@ -93,6 +93,17 @@ public class GUI_window_builder {
 		btnNewButton_1.setBounds(20, 52, 118, 23);
 		panel_1.add(btnNewButton_1);
 		
+		JPanel panel_2 = new JPanel();
+		panel_2.setBounds(10, 69, 414, 46);
+		frmTetrisInstaller.getContentPane().add(panel_2);
+		
+		JLabel lblNewLabel_2 = new JLabel("Welches Betriebssystem nutzen Sie?");
+		lblNewLabel_2.setHorizontalAlignment(SwingConstants.CENTER);
+		panel_2.add(lblNewLabel_2);
+		
+		
+		
+		
 		
 		btnNewButton.addActionListener(new ActionListener() {
 			
@@ -100,7 +111,7 @@ public class GUI_window_builder {
 			//functions
 			public String isPythonInstalled() {
 			    try {
-			            Process process = Runtime.getRuntime().exec("python.exe");
+			            Process process = Runtime.getRuntime().exec("python2.exe");
 			            return "yes";
 			    } catch (Exception e) {
 			            return "nope";
@@ -112,7 +123,7 @@ public class GUI_window_builder {
 			
 			
 			String successfull_python = "<html>Sie haben Python bereits installiert. <br /> Gehen Sie sicher, dass es sich um Python 3 handelt</html>";
-			String nope = "<html>Sie haben Python nicht installiert. <br />Klicken Sie jetzt auf installieren, um dies zu tun.</html>";
+			String nope = "<html>Sie haben Python nicht installiert. <br />Der Installer wird für Sie heruntergeladen.</html>";
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -123,8 +134,12 @@ public class GUI_window_builder {
 				}else {
 					lblNewLabel_1.setText(nope);
 					
+					
+					
+					
+					
 					try {
-						java.awt.Desktop.getDesktop().browse(new URI("https://google.de"));
+						java.awt.Desktop.getDesktop().browse(new URI("https://www.python.org/ftp/python/3.9.7/python-3.9.7-amd64.exe"));
 					} catch (IOException e1) {
 						e1.printStackTrace();
 					} catch (URISyntaxException e1) {
@@ -135,5 +150,17 @@ public class GUI_window_builder {
 			}
 			
 		});
+		
+		btnNewButton_1.addActionListener(new ActionListener() {
+
+			//functions to check for pygame
+			
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				System.out.println("yeseys");
+				
+			}
+			});
 	}
 }
