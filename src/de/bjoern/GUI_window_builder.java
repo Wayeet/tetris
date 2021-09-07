@@ -94,7 +94,6 @@ public class GUI_window_builder {
 		panel_1.add(btnNewButton_1);
 		
 		JPanel panel_2 = new JPanel();
-		panel_2.setVisible(false);
 		panel_2.setBounds(10, 69, 414, 46);
 		frmTetrisInstaller.getContentPane().add(panel_2);
 		panel_2.setLayout(null);
@@ -108,13 +107,18 @@ public class GUI_window_builder {
 		btnNewButton_windows.setBounds(0, 23, 120, 23);
 		panel_2.add(btnNewButton_windows);
 		
-		JButton btnNewButton_macos = new JButton("MacOS X");
+		JButton btnNewButton_macos = new JButton("MacOS X (Intel)");
 		btnNewButton_macos.setBounds(275, 23, 139, 23);
 		panel_2.add(btnNewButton_macos);
 		
 		JButton btnNewButton_linux = new JButton("AnyLINUX");
 		btnNewButton_linux.setBounds(130, 23, 135, 23);
 		panel_2.add(btnNewButton_linux);
+		
+		JPanel panel_3 = new JPanel();
+		panel_3.setBounds(20, 59, 389, 191);
+		frmTetrisInstaller.getContentPane().add(panel_3);
+		panel_3.setLayout(null);
 		
 		
 		
@@ -189,6 +193,54 @@ public class GUI_window_builder {
 				} catch (URISyntaxException e1) {
 					e1.printStackTrace();
 				}
+				
+			}
+			
+		});
+		
+		
+		btnNewButton_linux.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				
+				
+				lblNewLabel_1.setText("<html>Python ist auf LINUX vorinstalliert. Gehen Sie sicher, dass dies auch für Sie zutrifft</html>");
+				
+
+				
+			}
+			
+		});
+		btnNewButton_macos.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				
+				
+				lblNewLabel_1.setText("Der Installer wurde für Sie geladen");
+				
+				
+				try {
+					java.awt.Desktop.getDesktop().browse(new URI("https://www.python.org/ftp/python/3.9.7/python-3.9.7-macosx10.9.pkg"));
+				} catch (IOException e1) {
+					e1.printStackTrace();
+				} catch (URISyntaxException e1) {
+					e1.printStackTrace();
+				}
+				
+			}
+			
+		});
+		
+		
+		btnNewButton_1.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				
+				panel_1.setVisible(false);
+				panel_2.setVisible(false);
 				
 			}
 			
