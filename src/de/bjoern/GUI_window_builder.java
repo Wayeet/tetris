@@ -94,12 +94,27 @@ public class GUI_window_builder {
 		panel_1.add(btnNewButton_1);
 		
 		JPanel panel_2 = new JPanel();
+		panel_2.setVisible(false);
 		panel_2.setBounds(10, 69, 414, 46);
 		frmTetrisInstaller.getContentPane().add(panel_2);
+		panel_2.setLayout(null);
 		
 		JLabel lblNewLabel_2 = new JLabel("Welches Betriebssystem nutzen Sie?");
+		lblNewLabel_2.setBounds(0, 5, 414, 14);
 		lblNewLabel_2.setHorizontalAlignment(SwingConstants.CENTER);
 		panel_2.add(lblNewLabel_2);
+		
+		JButton btnNewButton_windows = new JButton("Windows");
+		btnNewButton_windows.setBounds(0, 23, 120, 23);
+		panel_2.add(btnNewButton_windows);
+		
+		JButton btnNewButton_macos = new JButton("MacOS X");
+		btnNewButton_macos.setBounds(275, 23, 139, 23);
+		panel_2.add(btnNewButton_macos);
+		
+		JButton btnNewButton_linux = new JButton("AnyLINUX");
+		btnNewButton_linux.setBounds(130, 23, 135, 23);
+		panel_2.add(btnNewButton_linux);
 		
 		
 		
@@ -135,16 +150,11 @@ public class GUI_window_builder {
 					lblNewLabel_1.setText(nope);
 					
 					
+					panel_2.setVisible(true);
+					btnNewButton.setVisible(false);
 					
 					
-					
-					try {
-						java.awt.Desktop.getDesktop().browse(new URI("https://www.python.org/ftp/python/3.9.7/python-3.9.7-amd64.exe"));
-					} catch (IOException e1) {
-						e1.printStackTrace();
-					} catch (URISyntaxException e1) {
-						e1.printStackTrace();
-					}
+
 				}
 				
 			}
@@ -162,5 +172,26 @@ public class GUI_window_builder {
 				
 			}
 			});
+		
+		btnNewButton_windows.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				
+				
+				lblNewLabel_1.setText("Der Installer wurde für Sie geladen");
+				
+				
+				try {
+					java.awt.Desktop.getDesktop().browse(new URI("https://www.python.org/ftp/python/3.9.7/python-3.9.7-amd64.exe"));
+				} catch (IOException e1) {
+					e1.printStackTrace();
+				} catch (URISyntaxException e1) {
+					e1.printStackTrace();
+				}
+				
+			}
+			
+		});
 	}
 }
