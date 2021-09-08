@@ -122,6 +122,10 @@ public class GUI_window_builder {
 		
 		
 		
+		panel_2.setVisible(false);
+		
+		
+		
 		
 		
 		btnNewButton.addActionListener(new ActionListener() {
@@ -142,7 +146,7 @@ public class GUI_window_builder {
 			
 			
 			String successfull_python = "<html>Sie haben Python bereits installiert. <br /> Gehen Sie sicher, dass es sich um Python 3 handelt</html>";
-			String nope = "<html>Sie haben Python nicht installiert. <br />Der Installer wird für Sie heruntergeladen.</html>";
+			String nope = "<html>Sie haben Python nicht installiert. <br />Welches Betriebssystem nutzen Sie?</html>";
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
