@@ -6,11 +6,9 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 
-import java.awt.BorderLayout;
 import java.awt.Font;
 import javax.swing.JPanel;
 import javax.swing.JButton;
-import javax.swing.border.EtchedBorder;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.io.InputStream;
@@ -18,19 +16,11 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.Scanner;
 import java.awt.event.ActionEvent;
-import java.awt.Panel;
+
 import java.awt.Color;
-import java.awt.GridBagLayout;
-import java.awt.GridBagConstraints;
-import java.awt.Insets;
-import com.jgoodies.forms.layout.FormLayout;
-import com.jgoodies.forms.layout.ColumnSpec;
-import com.jgoodies.forms.layout.RowSpec;
 
 
 
-import javax.swing.JProgressBar;
-import java.awt.Canvas;
 
 
 public class GUI_window_builder {
