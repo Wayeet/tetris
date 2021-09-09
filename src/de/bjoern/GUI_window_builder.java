@@ -27,6 +27,8 @@ import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.RowSpec;
 
+
+
 import javax.swing.JProgressBar;
 import java.awt.Canvas;
 
@@ -150,6 +152,10 @@ public class GUI_window_builder {
 		btn_pip_installed.setBounds(20, 52, 118, 23);
 		panel_1.add(btn_pip_installed);
 		
+		JButton btn_exit = new JButton("Beenden");
+		btn_exit.setBounds(20, 52, 118, 23);
+		panel_1.add(btn_exit);
+		
 		
 		
 		
@@ -172,7 +178,7 @@ public class GUI_window_builder {
 			
 			
 			String successfull_python = "<html>Sie haben Python bereits installiert. <br /> Gehen Sie sicher, dass es sich um Python 3 handelt</html>";
-			String nope = "<html>Sie haben Python nicht installiert. <br />Der Installer für " + getOperatingSystem() + " wurde für Sie heruntergeladen.</html>";
+			String nope = "<html>Sie haben Python nicht installiert. <br />Der Installer für " + getOperatingSystem() + " wurde für Sie heruntergeladen. Gehen Sie sicher, dass Sie die 'Add to PATH' Option anklicken.</html>";
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -218,12 +224,12 @@ public class GUI_window_builder {
 				
 				try {
 					
-					if (execCmd("pip32").contains("Commands:")) {
+					if (execCmd("pip3").contains("Commands:")) {
 						lblNewLabel_1.setText("<html>Pip3 ist auf ihren System installiert.</html>");
 						btnNewButton_1.setVisible(false);
 					}
 				} catch (Exception e2) {
-					lblNewLabel_1.setText("<html>Pip3 ist nicht installiert. Es wird in Kürze installiert.</html>");
+					lblNewLabel_1.setText("<html>Pip3 ist nicht installiert. Führen Sie den Python-Installer neu aus und klicken sie die Option 'Add Python to PATH' an.</html>");
 					
 				}
 
@@ -242,13 +248,34 @@ public class GUI_window_builder {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 			
-			
-			
 				
-				System.out.println(execCmd("pip3 install pygame"));
+				if (execCmd("pip3 install pygame").contains("Successfully")) {
+					System.out.println("yes");
+					lblNewLabel_1.setText("<html>Sofern Sie im Python-Installer 'Add to PATH' angekilckt haben, ist nun alles bereit.</html>");
+					btn_pip_installed.setVisible(false);
+				}else if(execCmd("pip3 install pygame").contains("already satisfied")) {
+					System.out.println("already yes");
+					lblNewLabel_1.setText("<html>Sofern Sie im Python-Installer 'Add to PATH' angekilckt haben, ist nun alles bereit.</html>");
+					btn_pip_installed.setVisible(false);
+					
+				}
+
 				
 			}
 			
 		});
+		
+		btn_exit.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				
+				System.exit(0);
+				
+			}
+			
+		});
+		
+		
 	}
 }
