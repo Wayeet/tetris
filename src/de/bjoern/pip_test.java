@@ -6,6 +6,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 import java.awt.Font;
+import javax.swing.JPanel;
 
 public class pip_test {
 
@@ -43,10 +44,15 @@ public class pip_test {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
-		JLabel lblNewLabel = new JLabel("alksjhgdpkjahsdlkjh");
-		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 47));
+		JPanel panel = new JPanel();
+		panel.setBounds(10, 11, 414, 239);
+		frame.getContentPane().add(panel);
+		panel.setLayout(null);
+		
+		JLabel lblNewLabel = new JLabel("iaugshdkihgasd");
+		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 35));
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel.setBounds(10, 11, 414, 107);
-		frame.getContentPane().add(lblNewLabel);
+		lblNewLabel.setBounds(10, 38, 404, 68);
+		panel.add(lblNewLabel);
 	}
 }

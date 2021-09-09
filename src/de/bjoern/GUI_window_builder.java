@@ -13,8 +13,10 @@ import javax.swing.JButton;
 import javax.swing.border.EtchedBorder;
 import java.awt.event.ActionListener;
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.Scanner;
 import java.awt.event.ActionEvent;
 import java.awt.Panel;
 import java.awt.Color;
@@ -25,8 +27,59 @@ import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.RowSpec;
 
+import javax.swing.JProgressBar;
+import java.awt.Canvas;
+
 
 public class GUI_window_builder {
+	
+	public String getOperatingSystem() {
+	    String os = System.getProperty("os.name");
+	    // System.out.println("Using System Property: " + os);
+	    return os;
+	}
+	
+	public static String execCmd(String cmd) {
+	    String result = null;
+	    try (InputStream inputStream = Runtime.getRuntime().exec(cmd).getInputStream();
+	            Scanner s = new Scanner(inputStream).useDelimiter("\\A")) {
+	        result = s.hasNext() ? s.next() : null;
+	    } catch (IOException e) {
+	        e.printStackTrace();
+	    }
+	    return result;
+	}
+	
+	public Boolean download_macos() {
+		
+		try {
+			java.awt.Desktop.getDesktop().browse(new URI("https://www.python.org/ftp/python/3.9.7/python-3.9.7-macosx10.9.pkg"));
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		} catch (URISyntaxException e1) {
+			e1.printStackTrace();
+		}
+		
+		return true;
+		
+	}
+
+
+	
+	public Boolean download_win() {
+		
+		try {
+			java.awt.Desktop.getDesktop().browse(new URI("https://www.python.org/ftp/python/3.9.7/python-3.9.7-amd64.exe"));
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		} catch (URISyntaxException e1) {
+			e1.printStackTrace();
+		}
+		
+		return true;
+		
+	}
+
 
 	private JFrame frmTetrisInstaller;
 
@@ -93,36 +146,9 @@ public class GUI_window_builder {
 		btnNewButton_1.setBounds(20, 52, 118, 23);
 		panel_1.add(btnNewButton_1);
 		
-		JPanel panel_2 = new JPanel();
-		panel_2.setBounds(10, 69, 414, 46);
-		frmTetrisInstaller.getContentPane().add(panel_2);
-		panel_2.setLayout(null);
-		
-		JLabel lblNewLabel_2 = new JLabel("Welches Betriebssystem nutzen Sie?");
-		lblNewLabel_2.setBounds(0, 5, 414, 14);
-		lblNewLabel_2.setHorizontalAlignment(SwingConstants.CENTER);
-		panel_2.add(lblNewLabel_2);
-		
-		JButton btnNewButton_windows = new JButton("Windows");
-		btnNewButton_windows.setBounds(0, 23, 120, 23);
-		panel_2.add(btnNewButton_windows);
-		
-		JButton btnNewButton_macos = new JButton("MacOS X (Intel)");
-		btnNewButton_macos.setBounds(275, 23, 139, 23);
-		panel_2.add(btnNewButton_macos);
-		
-		JButton btnNewButton_linux = new JButton("AnyLINUX");
-		btnNewButton_linux.setBounds(130, 23, 135, 23);
-		panel_2.add(btnNewButton_linux);
-		
-		JPanel panel_3 = new JPanel();
-		panel_3.setBounds(20, 59, 389, 191);
-		frmTetrisInstaller.getContentPane().add(panel_3);
-		panel_3.setLayout(null);
-		
-		
-		
-		panel_2.setVisible(false);
+		JButton btn_pip_installed = new JButton("Installieren");
+		btn_pip_installed.setBounds(20, 52, 118, 23);
+		panel_1.add(btn_pip_installed);
 		
 		
 		
@@ -146,7 +172,7 @@ public class GUI_window_builder {
 			
 			
 			String successfull_python = "<html>Sie haben Python bereits installiert. <br /> Gehen Sie sicher, dass es sich um Python 3 handelt</html>";
-			String nope = "<html>Sie haben Python nicht installiert. <br />Welches Betriebssystem nutzen Sie?</html>";
+			String nope = "<html>Sie haben Python nicht installiert. <br />Der Installer für " + getOperatingSystem() + " wurde für Sie heruntergeladen.</html>";
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -157,11 +183,22 @@ public class GUI_window_builder {
 				}else {
 					lblNewLabel_1.setText(nope);
 					
-					
-					panel_2.setVisible(true);
 					btnNewButton.setVisible(false);
 					
 					
+					if (getOperatingSystem().contains("Windows")) {
+						download_win();
+					} else if(getOperatingSystem().contains("Mac")) {
+						download_macos();
+					}else if(getOperatingSystem().contains("Linux")) {
+						//show linux message
+						lblNewLabel_1.setText("<html>Python ist auf LINUX vorinstalliert. Gehen Sie sicher, dass dies auch für Sie zutrifft</html>");
+					}else {
+						lblNewLabel_1.setText("<html>Dein Betriebssystem konnte nicht festgestellt werden. Bitte lade Python 3 manuell herunter.</html>");
+					}
+					
+					
+					
 
 				}
 				
@@ -169,82 +206,46 @@ public class GUI_window_builder {
 			
 		});
 		
-		btnNewButton_1.addActionListener(new ActionListener() {
 
-			//functions to check for pygame
-			
-			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				System.out.println("yeseys");
-				
-			}
-			});
-		
-		btnNewButton_windows.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				
-				
-				lblNewLabel_1.setText("Der Installer wurde für Sie geladen");
-				
-				
-				try {
-					java.awt.Desktop.getDesktop().browse(new URI("https://www.python.org/ftp/python/3.9.7/python-3.9.7-amd64.exe"));
-				} catch (IOException e1) {
-					e1.printStackTrace();
-				} catch (URISyntaxException e1) {
-					e1.printStackTrace();
-				}
-				
-			}
-			
-		});
-		
-		
-		btnNewButton_linux.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				
-				
-				lblNewLabel_1.setText("<html>Python ist auf LINUX vorinstalliert. Gehen Sie sicher, dass dies auch für Sie zutrifft</html>");
-				
-
-				
-			}
-			
-		});
-		btnNewButton_macos.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				
-				
-				lblNewLabel_1.setText("Der Installer wurde für Sie geladen");
-				
-				
-				try {
-					java.awt.Desktop.getDesktop().browse(new URI("https://www.python.org/ftp/python/3.9.7/python-3.9.7-macosx10.9.pkg"));
-				} catch (IOException e1) {
-					e1.printStackTrace();
-				} catch (URISyntaxException e1) {
-					e1.printStackTrace();
-				}
-				
-			}
-			
-		});
 		
 		
 		btnNewButton_1.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
+
+
 				
-				panel_1.setVisible(false);
-				panel_2.setVisible(false);
+				try {
+					
+					if (execCmd("pip32").contains("Commands:")) {
+						lblNewLabel_1.setText("<html>Pip3 ist auf ihren System installiert.</html>");
+						btnNewButton_1.setVisible(false);
+					}
+				} catch (Exception e2) {
+					lblNewLabel_1.setText("<html>Pip3 ist nicht installiert. Es wird in Kürze installiert.</html>");
+					
+				}
+
+				
+				
+			}
+			
+		});
+		
+		
+		
+		btn_pip_installed.addActionListener(new ActionListener() {
+
+		
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+			
+			
+			
+				
+				System.out.println(execCmd("pip3 install pygame"));
 				
 			}
 			
