@@ -178,7 +178,7 @@ public class GUI_window_builder {
 			
 			
 			String successfull_python = "<html>Sie haben Python bereits installiert. <br /> Gehen Sie sicher, dass es sich um Python 3 handelt</html>";
-			String nope = "<html>Sie haben Python nicht installiert. <br />Der Installer für " + getOperatingSystem() + " wurde für Sie heruntergeladen. Gehen Sie sicher, dass Sie die 'Add to PATH' Option anklicken.</html>";
+			String nope = "<html>Sie haben Python nicht installiert. <br />Der Installer fuer " + getOperatingSystem() + " wurde fuer Sie heruntergeladen. Gehen Sie sicher, dass Sie die 'Add to PATH' Option anklicken.</html>";
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -198,7 +198,7 @@ public class GUI_window_builder {
 						download_macos();
 					}else if(getOperatingSystem().contains("Linux")) {
 						//show linux message
-						lblNewLabel_1.setText("<html>Python ist auf LINUX vorinstalliert. Gehen Sie sicher, dass dies auch für Sie zutrifft</html>");
+						lblNewLabel_1.setText("<html>Python ist auf LINUX vorinstalliert. Gehen Sie sicher, dass dies auch fuer Sie zutrifft</html>");
 					}else {
 						lblNewLabel_1.setText("<html>Dein Betriebssystem konnte nicht festgestellt werden. Bitte lade Python 3 manuell herunter.</html>");
 					}
@@ -229,7 +229,7 @@ public class GUI_window_builder {
 						btnNewButton_1.setVisible(false);
 					}
 				} catch (Exception e2) {
-					lblNewLabel_1.setText("<html>Pip3 ist nicht installiert. Führen Sie den Python-Installer neu aus und klicken sie die Option 'Add Python to PATH' an.</html>");
+					lblNewLabel_1.setText("<html>Pip3 ist nicht installiert. Fuehren Sie den Python-Installer neu aus und klicken sie die Option 'Add Python to PATH' an.</html>");
 					
 				}
 
